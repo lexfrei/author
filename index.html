@@ -16,6 +16,8 @@
       --ink: #130f0d;
       --line: rgba(244, 234, 210, .28);
       --edge: clamp(18px, 3.2vw, 54px);
+      --tilt: -16deg;
+      --disc: clamp(160px, 26vw, 460px);
     }
 
     * { box-sizing: border-box; }
@@ -49,12 +51,14 @@
       content: "";
       position: absolute;
       z-index: 1;
-      width: min(41vw, 560px);
+      width: var(--disc);
       aspect-ratio: 1;
-      right: -14vw;
-      top: -26vw;
-      border: 1px solid rgba(19, 15, 13, .24);
+      /* centred where the lanes' midline, which passes through the
+         middle of the screen, meets the right edge */
+      right: calc(var(--disc) / -2);
+      top: calc(50% + 50vw * tan(var(--tilt)) - var(--disc) / 2);
       border-radius: 50%;
+      background: var(--ink);
       pointer-events: none;
     }
 
@@ -66,7 +70,7 @@
       flex-direction: column;
       justify-content: center;
       gap: clamp(13px, 2.1vh, 28px);
-      transform: rotate(-16deg) scale(1.12);
+      transform: rotate(var(--tilt)) scale(1.12);
       opacity: .8;
       pointer-events: none;
     }
@@ -181,11 +185,11 @@
     }
 
     @media (max-width: 640px) {
-      :root { --edge: 14px; }
+      :root { --edge: 14px; --tilt: -14deg; --disc: 52vw; }
       .catalogue {
         inset: -16vh -72vw;
         gap: 16px;
-        transform: rotate(-14deg) scale(1.2);
+        transform: rotate(var(--tilt)) scale(1.2);
         opacity: .7;
       }
       .entry { font-size: 15px; }
