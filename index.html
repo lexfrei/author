@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#8f2027">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap" rel="stylesheet">
   <title>У ВАС АВТОР УМЕР — А ЖИВ ЛИ ЗРИТЕЛЬ</title>
   <style>
     :root {
@@ -21,11 +21,8 @@
 
     * { box-sizing: border-box; }
 
-    html, body { width: 100%; min-height: 100%; margin: 0; }
-
     body {
-      min-height: 100vh;
-      min-height: 100svh;
+      margin: 0;
       overflow: hidden;
       background: var(--red);
       color: var(--paper);
@@ -35,8 +32,6 @@
     .poster {
       position: relative;
       isolation: isolate;
-      width: 100%;
-      height: 100vh;
       height: 100svh;
       overflow: hidden;
       background:
@@ -76,10 +71,8 @@
       justify-content: center;
       gap: clamp(13px, 2.1vh, 28px);
       transform: rotate(-11deg) scale(1.12);
-      transform-origin: center;
       opacity: .8;
       pointer-events: none;
-      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 11%, #000 89%, transparent 100%);
       mask-image: linear-gradient(90deg, transparent 0%, #000 11%, #000 89%, transparent 100%);
     }
 
@@ -90,18 +83,11 @@
       will-change: transform;
     }
 
-    .lane__run {
-      display: flex;
-      flex: none;
-      align-items: center;
-      gap: clamp(27px, 4.4vw, 76px);
-      padding-right: clamp(27px, 4.4vw, 76px);
-    }
-
     .entry {
       display: inline-flex;
       align-items: baseline;
       gap: .46em;
+      padding-right: clamp(27px, 4.4vw, 76px);
       color: rgba(244, 234, 210, .77);
       font-size: clamp(14px, 1.55vw, 25px);
       font-weight: 700;
@@ -118,42 +104,34 @@
       position: relative;
       z-index: 2;
       display: flex;
-      height: 100vh;
-      height: 100svh;
-      min-height: 0;
+      height: 100%;
       flex-direction: column;
       justify-content: space-between;
       padding: calc(var(--edge) + clamp(10px, 3svh, 32px)) calc(var(--edge) + clamp(22px, 5.2vw, 86px));
-      pointer-events: none;
     }
 
     .headline {
-      position: relative;
-      width: fit-content;
-      max-width: 100%;
       margin: 0;
-      font-family: "Arial Black", Arial, Helvetica, sans-serif;
       font-weight: 900;
       line-height: .83;
       letter-spacing: -.075em;
       text-transform: uppercase;
-      text-wrap: balance;
       text-shadow: 0 2px 0 rgba(19, 15, 13, .08);
     }
 
     .headline--first {
+      align-self: flex-start;
       font-family: Helvetica, Arial, sans-serif;
       font-size: clamp(43px, min(11.25vw, 16svh), 190px);
-      max-width: 9.6em;
-      align-self: flex-start;
     }
 
+    /* Inter is wider than Helvetica: the Helvetica tracking makes its letters collide */
     .headline--second {
-      font-family: Inter, Helvetica, Arial, sans-serif;
-      font-size: clamp(43px, min(11.7vw, 16svh), 198px);
-      max-width: 9em;
       align-self: flex-end;
       text-align: right;
+      font-family: Inter, Helvetica, Arial, sans-serif;
+      font-size: clamp(43px, min(11.7vw, 16svh), 198px);
+      letter-spacing: -.04em;
     }
 
     .headline__line { display: block; }
@@ -171,8 +149,6 @@
       text-transform: none;
     }
 
-    .headline--second .date { text-align: right; }
-
     .date::before {
       content: "";
       display: inline-block;
@@ -182,8 +158,6 @@
       background: currentColor;
       opacity: .75;
     }
-
-    .headline--second .date::before { margin: 0 .65em .28em 0; }
 
     .registration {
       position: absolute;
@@ -198,7 +172,6 @@
         linear-gradient(var(--paper), var(--paper)) left 0 / 100% 1px no-repeat,
         linear-gradient(var(--paper), var(--paper)) left 50% / 75% 1px no-repeat,
         linear-gradient(var(--paper), var(--paper)) left 100% / 100% 1px no-repeat;
-      pointer-events: none;
     }
 
     .corner-mark {
@@ -211,13 +184,10 @@
       border-top: 1px solid var(--paper);
       border-right: 1px solid var(--paper);
       opacity: .72;
-      pointer-events: none;
     }
-
 
     @media (max-width: 640px) {
       :root { --edge: 14px; }
-      .poster::before { inset: var(--edge); }
       .catalogue {
         inset: -16vh -72vw;
         gap: 16px;
@@ -228,14 +198,8 @@
       .composition {
         padding: calc(var(--edge) + clamp(10px, 2svh, 18px)) calc(var(--edge) + 20px);
       }
-      .headline--first {
-        font-size: clamp(34px, min(12.7vw, 12.5svh), 78px);
-        max-width: 8.8em;
-      }
-      .headline--second {
-        font-size: clamp(34px, min(12.4vw, 12.5svh), 76px);
-        max-width: 8.8em;
-      }
+      .headline--first { font-size: clamp(34px, min(12.7vw, 12.5svh), 78px); }
+      .headline--second { font-size: clamp(34px, min(12.4vw, 12.5svh), 76px); }
       .headline--first .headline__line:last-child { padding-left: .25em; }
       .headline--second .headline__line:first-child { padding-right: .35em; }
       .date { margin-top: clamp(10px, 2.2svh, 20px); font-size: 16px; }
@@ -246,163 +210,112 @@
       .headline--first, .headline--second { font-size: clamp(30px, min(12vw, 12svh), 46px); }
       .composition { padding-right: 28px; padding-left: 28px; }
     }
-
   </style>
 </head>
 <body>
-  <main class="poster" aria-label="Типографическая композиция">
+  <main class="poster">
     <div class="catalogue" aria-hidden="true"></div>
-
     <div class="registration" aria-hidden="true"></div>
     <div class="corner-mark" aria-hidden="true"></div>
 
-    <section class="composition" aria-label="У ВАС АВТОР УМЕР. А ЖИВ ЛИ ЗРИТЕЛЬ.">
+    <section class="composition">
       <h1 class="headline headline--first">
         <span class="headline__line">У ВАС</span>
         <span class="headline__line">АВТОР УМЕР</span>
         <span class="date">1967</span>
       </h1>
-      <h2 class="headline headline--second">
+      <p class="headline headline--second">
         <span class="headline__line">А ЖИВ ЛИ</span>
         <span class="headline__line">ЗРИТЕЛЬ</span>
         <span class="date">сегодня</span>
-      </h2>
+      </p>
     </section>
   </main>
-  <script>
-    (async () => {
-      const response = await fetch("works.csv");
-      if (!response.ok) return;
-      const source = (await response.text()).trim();
-      const catalogue = document.querySelector(".catalogue");
+  <script type="module">
+    const LANES = 6;
+    const SPEED = 20; // px per second
 
-      function parseCSV(text) {
-        const rows = [];
-        let row = [];
-        let field = "";
-        let quoted = false;
+    const catalogue = document.querySelector(".catalogue");
+    const response = await fetch("works.csv");
+    if (!response.ok) throw new Error(`works.csv: HTTP ${response.status}`);
 
-        for (let index = 0; index < text.length; index += 1) {
-          const character = text[index];
-          if (quoted) {
-            if (character === '"' && text[index + 1] === '"') {
-              field += '"';
-              index += 1;
-            } else if (character === '"') {
-              quoted = false;
-            } else {
-              field += character;
-            }
-          } else if (character === '"' && field.length === 0) {
-            quoted = true;
-          } else if (character === ",") {
-            row.push(field);
-            field = "";
-          } else if (character === "\n" || character === "\r") {
-            if (character === "\r" && text[index + 1] === "\n") index += 1;
-            row.push(field);
-            if (row.some((value) => value !== "")) rows.push(row);
-            row = [];
-            field = "";
-          } else {
-            field += character;
-          }
+    // Fields never contain line breaks, so a row is a line.
+    const [, ...rows] = (await response.text()).trim().split(/\r?\n/);
+    const works = rows.map((row) => Array.from(
+      row.matchAll(/(?:^|,)(?:"((?:[^"]|"")*)"|([^,]*))/g),
+      ([, quoted, plain]) => quoted?.replaceAll('""', '"') ?? plain,
+    ));
+
+    function span(className, text) {
+      const element = document.createElement("span");
+      element.className = className;
+      element.textContent = text;
+      return element;
+    }
+
+    function randomEntry() {
+      const [title, author, year] = works[Math.floor(Math.random() * works.length)];
+      const entry = span("entry", "");
+      entry.append(
+        span("entry__title", title),
+        span("entry__dash", "—"),
+        // \p{M}: combining marks would otherwise stack on top of the blocks
+        span("entry__mask", author.replace(/[\p{L}\p{M}\p{N}]/gu, "█")),
+        span("entry__dash", "—"),
+        span("entry__year", year),
+      );
+      return entry;
+    }
+
+    // offsetWidth is rounded to whole pixels; summing it would make lanes twitch.
+    const widthOf = (element) => parseFloat(getComputedStyle(element).width);
+
+    const lanes = Array.from({ length: LANES }, (_, index) => {
+      const element = document.createElement("div");
+      element.className = "lane";
+      catalogue.append(element);
+      return { element, x: 0, direction: index % 2 ? 1 : -1 };
+    });
+
+    // Keeps the lane covering [0, catalogue width]: entries are added on the
+    // side that comes into view and dropped once they have fully left it.
+    function fill(lane) {
+      const { element } = lane;
+      const limit = catalogue.clientWidth;
+      if (!limit) return;
+      while (lane.x > 0) {
+        const entry = randomEntry();
+        element.prepend(entry);
+        lane.x -= widthOf(entry);
+      }
+      while (element.firstChild && lane.x + widthOf(element.firstChild) <= 0) {
+        lane.x += widthOf(element.firstChild);
+        element.firstChild.remove();
+      }
+      while (lane.x + widthOf(element) < limit) element.append(randomEntry());
+      while (element.lastChild && lane.x + widthOf(element) - widthOf(element.lastChild) >= limit) {
+        element.lastChild.remove();
+      }
+      element.style.transform = `translateX(${lane.x}px)`;
+    }
+
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const fillAll = () => lanes.forEach(fill);
+      fillAll();
+      addEventListener("resize", fillAll, { passive: true });
+    } else {
+      let previous;
+      requestAnimationFrame(function frame(now) {
+        // Clamped so a backgrounded tab does not jump on return.
+        const elapsed = previous === undefined ? 0 : Math.min(now - previous, 50) / 1000;
+        previous = now;
+        for (const lane of lanes) {
+          lane.x += lane.direction * SPEED * elapsed;
+          fill(lane);
         }
-
-        if (field !== "" || row.length > 0) {
-          row.push(field);
-          if (row.some((value) => value !== "")) rows.push(row);
-        }
-        return rows;
-      }
-
-      function censorAuthor(author) {
-        return Array.from(author, (character) =>
-          /[\p{L}\p{N}]/u.test(character) ? "█" : character
-        ).join("");
-      }
-
-      function addField(entry, className, value) {
-        const field = document.createElement("span");
-        field.className = className;
-        field.textContent = value;
-        entry.appendChild(field);
-      }
-
-      const [, ...records] = parseCSV(source);
-      const works = records
-        .filter((record) => record.length === 5)
-        .map(([title, author, year, medium, culture]) => ({ title, author, year, medium, culture }));
-      const pixelsPerSecond = 20;
-      const lanes = [];
-
-      function addWork(run, work) {
-        const entry = document.createElement("span");
-        entry.className = "entry";
-        addField(entry, "entry__title", work.title);
-        addField(entry, "entry__dash", "—");
-        addField(entry, "entry__mask", censorAuthor(work.author));
-        addField(entry, "entry__dash", "—");
-        addField(entry, "entry__year", work.year);
-        run.appendChild(entry);
-      }
-
-      for (let laneIndex = 0; laneIndex < 6; laneIndex += 1) {
-        const lane = document.createElement("div");
-        lane.className = "lane";
-        const offset = (laneIndex * 23) % works.length;
-        const orderedWorks = works.slice(offset).concat(works.slice(0, offset));
-        let firstRun;
-
-        for (let copy = 0; copy < 2; copy += 1) {
-          const run = document.createElement("div");
-          run.className = "lane__run";
-          orderedWorks.forEach((work) => addWork(run, work));
-          if (copy === 0) firstRun = run;
-          lane.appendChild(run);
-        }
-        catalogue.appendChild(lane);
-        lanes.push({
-          element: lane,
-          measureFrom: firstRun,
-          width: 0,
-          offset: 0,
-          speed: pixelsPerSecond,
-          direction: laneIndex % 2 === 0 ? -1 : 1,
-        });
-      }
-
-      function measureLanes() {
-        lanes.forEach((lane) => {
-          lane.width = lane.measureFrom.offsetWidth;
-          if (lane.width > 0) lane.offset %= lane.width;
-        });
-      }
-
-      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-      if (!reducedMotion.matches) {
-        let previousTime = 0;
-        function moveRows(now) {
-          const elapsed = previousTime ? Math.min((now - previousTime) / 1000, 0.05) : 0;
-          previousTime = now;
-          lanes.forEach((lane) => {
-            if (!lane.width) return;
-            lane.offset = (lane.offset + lane.speed * elapsed) % lane.width;
-            lane.element.style.transform = `translate3d(${lane.direction * lane.offset}px, 0, 0)`;
-          });
-          requestAnimationFrame(moveRows);
-        }
-
-        const startMotion = () => {
-          measureLanes();
-          requestAnimationFrame(moveRows);
-        };
-        if (document.fonts?.ready) document.fonts.ready.then(startMotion);
-        else startMotion();
-        window.addEventListener("resize", measureLanes, { passive: true });
-        document.fonts?.addEventListener("loadingdone", measureLanes);
-      }
-    })();
+        requestAnimationFrame(frame);
+      });
+    }
   </script>
 </body>
 </html>
